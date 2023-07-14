@@ -1,0 +1,10 @@
+<html class="no-js" lang="en">
+  <body>
+    <div>
+      {% for todo in todos %}
+     {{ data.text }} : {{ data.stars }}
+      {% empty %}
+      Info not found
+      {% endfor %}
+    </div>
+<div>
