@@ -1,9 +1,9 @@
 from django.urls import path
 
-from server.apps.main.views import index
+from server.apps.main.views import index, get_person
 
 app_name = 'main'
 
 urlpatterns = [
-    path('hello/', index, name='hello'),
+    path('', get_person, name='123'),
 ]
