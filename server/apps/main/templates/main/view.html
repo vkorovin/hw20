@@ -1,10 +1,19 @@
 <html class="no-js" lang="en">
   <body>
     <div>
+      <table>
+        <tr>
+          <td><h1>RepoName </h1></td>
+          <td><h1>Stars Count</h1></td>
+        </tr>
       {% for d in data %}
-     {{ d.text }} : {{ d.stars }} \n
+        <tr>
+          <td> {{ d.text }} </td>
+          <td> {{ d.stars }} </td>
+        </tr>
       {% empty %}
       Info not found
       {% endfor %}
+      </table>
     </div>
 <div>
