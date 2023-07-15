@@ -17,3 +17,5 @@ CSP_FONT_SRC: Tuple[str, ...] = ("'self'",)
 CSP_STYLE_SRC: Tuple[str, ...] = ("'self'",)
 CSP_DEFAULT_SRC: Tuple[str, ...] = ("'none'",)
 CSP_CONNECT_SRC: Tuple[str, ...] = ()
+
+

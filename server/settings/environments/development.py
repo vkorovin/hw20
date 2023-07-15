@@ -157,3 +157,4 @@ EXTRA_CHECKS = {
 # Disable persistent DB connections
 # https://docs.djangoproject.com/en/4.2/ref/databases/#caveats
 DATABASES['default']['CONN_MAX_AGE'] = 0
+CSP_INCLUDE_NONCE_IN = ['script-src']
