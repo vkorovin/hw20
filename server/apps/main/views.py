@@ -33,5 +33,6 @@ def get_person(request):
         person = PersonForm()
     return render(request, "main/form.html", {'form': person})
 
-
+def testview(request):
+    return render(request, "main/test.html")
 
