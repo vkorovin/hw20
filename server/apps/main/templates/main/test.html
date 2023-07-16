@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <body>
-<p> Hello world </p>
-<p><a href="{% url 'main:testview' %}">Собаки</a></p>
+<p> Hello world  </p>
+
+ <script nonce="{{request.csp_nonce}}">
+    alert( 'Привет, мир!' );
+  </script>
+
+<p><a href="{% url 'main:getstatus' 111 %}">Собаки</a></p>
 </body>
 </html>

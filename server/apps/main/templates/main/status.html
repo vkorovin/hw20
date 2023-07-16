@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<body>
+
+ <script nonce="{{request.csp_nonce}}">
+ function sleep(ms) {
+  var start = Date.now(), expire = start + ms;
+  while (Date.now() < expire) {}
+  return;
+ }
+
+
+ function getStatus() {
+      alert("Данные в обработке");
+      var ms_delay = 1000;
+      let i = 5;
+      while(i)
+      {
+      sleep(ms_delay);
+         fetch(statusURL).then(function(response){
+           response.json().then(function(data){
+              if(data.state == "SUCCESS") {
+              window.location.assign(resultURL);
+            }
+          });
+        });
+       i--
+      }
+  }
+ document.write("Данные в обработке");
+ var statusURL ="{% url 'main:getstatus'  task_id  %}"
+ var resultURL ="{% url 'main:result'  task_id  %}"
+ getStatus()
+ window.location.assign(resultURL);
+ </script>
+
+</body>
+</html>

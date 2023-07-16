@@ -21,13 +21,12 @@ def get_person(request):
             name = person.cleaned_data["name"]
             result = tasks.parser.delay(name)
 
-
+            return render(request, "main/status.html", {'task_id': result.task_id})
             while result.state != 'SUCCESS' and result.state != 'FAILURE':
                 time.sleep(1)
-                result = AsyncResult(result.task_id)
 
+            result = AsyncResult(result.task_id)
             data = result.get()
-
             return render(request, "main/view.html", {'data': data})
     else:
         person = PersonForm()
@@ -36,3 +35,15 @@ def get_person(request):
 def testview(request):
     return render(request, "main/test.html")
 
+def getstatus(request,task_id):
+    result = AsyncResult(task_id)
+    response = {
+        'state': result.state,
+        'details': result.info,
+    }
+    return HttpResponse(json.dumps(response), content_type='application/json')
+
+def result(request,task_id):
+    res = AsyncResult(task_id)
+    data = res.get()
+    return render(request, "main/view.html", {'data': data})
