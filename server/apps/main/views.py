@@ -19,7 +19,6 @@ def get_person(request):
         if person.is_valid():
 
             name = person.cleaned_data["name"]
-            #url = "https://github.com/{0}?tab=repositories".format(name)
             result = tasks.parser.delay(name)
 
 
