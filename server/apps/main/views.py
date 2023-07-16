@@ -21,7 +21,7 @@ def get_person(request):
             name = person.cleaned_data["name"]
             result = tasks.parser.delay(name)
 
-            return render(request, "main/status.html", {'task_id': result.task_id})
+            #return render(request, "main/status.html", {'task_id': result.task_id})
             while result.state != 'SUCCESS' and result.state != 'FAILURE':
                 time.sleep(1)
 
