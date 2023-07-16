@@ -1,17 +1,34 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-import json
+#import json,urllib.request
 from celery import Celery
+from .parser import ghparser
 
 app = Celery('tasks', backend='://localhost', broker='pyamqp://guest@localhost//',)
 app.conf.result_backend = 'redis://localhost:6379/0'
 
 @app.task
-def scarper(url):
+def parser(name):
+    return ghparser(name)
 
-    if url.find('?tab=repositories') == -1:
-        url += '?tab=repositories'
+#def ghparser(user):
+#
+#    output =   urllib.request.urlopen('https://api.github.com/users/{0}/repos'.format(user)).read()
+#    result  = json.loads(output)
+#    data = []
+#    for  value in result:
+#        ditem = dict()
+#        ditem['url'] = value.get('html_url')
+#        ditem['text'] = value.get('name')
+#        ditem['stars'] = value.get('stargazers_count')
+
+ #       data.append(ditem)
+
+  #  return data
+
+@app.task
+def scarper(url):
 
     page = requests.get(url)
     soup = BeautifulSoup(page.text, "html.parser")
@@ -39,4 +56,5 @@ def scarper(url):
     return result
 
 if __name__ == '__main__':
-    print(scarper(url='https://github.com/jborean93'))
+    print(ghparser('elvgarrui'))
+
